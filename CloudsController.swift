@@ -12,6 +12,29 @@ class CloudsController {
 
     var lastCloudPositionY = CGFloat()
     
+    func shuffle( cloudsArray: [SKSpriteNode]) -> [SKSpriteNode] {
+        
+        //        for var i = cloudsArray.count - 1; i > 0; i-- {
+        var cloudsArray = cloudsArray
+        
+        for i in (1...cloudsArray.count-1).reversed() {
+            
+            let j = Int(arc4random_uniform(UInt32(i-1)))
+        
+            swap(&cloudsArray[i], &cloudsArray[j])
+
+        }
+        
+        return cloudsArray
+    }
+    
+    
+    func randomBetweenNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat {
+        
+        return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
+    }
+    
+    
     func createClouds() -> [SKSpriteNode] {
         
         var clouds = [SKSpriteNode]()
@@ -45,6 +68,8 @@ class CloudsController {
             clouds.append(darkCloud)
         }
         
+        clouds = shuffle(cloudsArray: clouds)
+        
         return clouds
     }
     
@@ -59,6 +84,7 @@ class CloudsController {
             
             while(clouds[0].name == "Dark Cloud") {
                 //shuffle cloud array
+                clouds = shuffle(cloudsArray: clouds)
             }
         }
         
@@ -69,10 +95,23 @@ class CloudsController {
             positionY = lastCloudPositionY
         }
         
+        var random = 0
+        
         for i in 0...clouds.count - 1 {
             
+            var randomX = CGFloat()
+            
+            if random == 0 {
+                randomX = randomBetweenNumbers(firstNum: center + 90, secondNum: maxX)
+                random = 1
+            } else if random == 1 {
+                randomX = randomBetweenNumbers(firstNum: center - 90, secondNum: minX)
+                random = 0
+            }
+            
+            
             //set cloud position
-            clouds[i].position = CGPoint(x: 0, y: positionY)
+            clouds[i].position = CGPoint(x: randomX, y: positionY)
             clouds[i].zPosition = 3
             
             //add clouds to scene

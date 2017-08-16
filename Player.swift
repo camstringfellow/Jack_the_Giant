@@ -8,6 +8,12 @@
 
 import SpriteKit
 
+struct ColliderType {
+    static let player: UInt32 = 0
+    static let cloud: UInt32 = 1
+    static let darkCloudAndCollectables: UInt32 = 2
+}
+
 class Player: SKSpriteNode {
     
     private var textureAtlas = SKTextureAtlas()
@@ -24,6 +30,16 @@ class Player: SKSpriteNode {
         }
         
         animatePlayerAction = SKAction.animate(with: playerAnimation, timePerFrame: 0.08, resize: true, restore: false)
+        
+        //definie physics body as rectangle around player
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width, height: self.size.height))
+        self.physicsBody?.affectedByGravity = true
+        //who is the physics body
+        self.physicsBody?.categoryBitMask = ColliderType.player
+        //what stops it
+        self.physicsBody?.collisionBitMask = ColliderType.cloud
+        //alert when contacted
+        self.physicsBody?.contactTestBitMask = ColliderType.darkCloudAndCollectables
         
     }
     
