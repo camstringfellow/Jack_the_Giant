@@ -27,6 +27,8 @@ class GameplayScene: SKScene {
     
     var center: CGFloat?
     
+    private var cameraDistanceBeforeCreatingNewClouds = CGFloat()
+    
     //Clouds
     let distanceBetweenClouds = CGFloat(240)
     let minX = CGFloat(-115)
@@ -41,6 +43,7 @@ class GameplayScene: SKScene {
         moveCamera()
         managePlayer()
         manageBackgrounds()
+        createNewClouds()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -78,7 +81,7 @@ class GameplayScene: SKScene {
         
         cloudsController.arrageCloudsInScene(scene: self.scene!, distanceBetweenClouds: distanceBetweenClouds, center: center!, minX: minX, maxX: maxX, initialClouds: true)
         
-//        print(cloudsController.randomBetweenNumbers(firstNum: 2, secondNum: 5))
+        cameraDistanceBeforeCreatingNewClouds = (mainCamera?.position.y)! - 400
         
     }
     
@@ -107,6 +110,19 @@ class GameplayScene: SKScene {
         bg2?.moveBG(camera: mainCamera!)
         bg3?.moveBG(camera: mainCamera!)
     }
+    
+    // Creating new clouds
+    func createNewClouds() {
+        //if we pass where we need to make new clouds
+        if cameraDistanceBeforeCreatingNewClouds > (mainCamera?.position.y)! {
+            
+            cameraDistanceBeforeCreatingNewClouds = (mainCamera?.position.y)! - 400
+            
+            cloudsController.arrageCloudsInScene(scene: self.scene!, distanceBetweenClouds: distanceBetweenClouds, center: center!, minX: minX, maxX: maxX, initialClouds: false)
+        }
+        
+    }
+    
     
 }
 

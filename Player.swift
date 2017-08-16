@@ -32,7 +32,7 @@ class Player: SKSpriteNode {
         animatePlayerAction = SKAction.animate(with: playerAnimation, timePerFrame: 0.08, resize: true, restore: false)
         
         //definie physics body as rectangle around player
-        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width, height: self.size.height))
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width - 50, height: self.size.height - 5))
         self.physicsBody?.affectedByGravity = true
         //who is the physics body
         self.physicsBody?.categoryBitMask = ColliderType.player
@@ -40,6 +40,10 @@ class Player: SKSpriteNode {
         self.physicsBody?.collisionBitMask = ColliderType.cloud
         //alert when contacted
         self.physicsBody?.contactTestBitMask = ColliderType.darkCloudAndCollectables
+        //doesnt topple over when falling
+        self.physicsBody?.allowsRotation = false
+        //stops player from bouncing
+        self.physicsBody?.restitution = 0
         
     }
     
