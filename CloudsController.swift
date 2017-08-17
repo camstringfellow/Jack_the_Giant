@@ -42,6 +42,8 @@ class CloudsController {
         //for i = 0; i < 2; i++
         for i in 0..<2 {
             
+            
+            
             let cloud1 = SKSpriteNode(imageNamed: "Cloud 1")
             cloud1.name = "1"
             let cloud2 = SKSpriteNode(imageNamed: "Cloud 2")
