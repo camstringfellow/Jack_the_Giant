@@ -23,6 +23,8 @@ class MainMenuScene: SKScene {
             
             if atPoint(location).name ==  "Start Game" {
                 
+                GameManager.instance.gameStartedFromMainMenu = true
+                
                 let scene = GameplayScene(fileNamed: "GameplayScene")
                 
                 scene?.scaleMode = .aspectFill
@@ -51,6 +53,7 @@ class MainMenuScene: SKScene {
                 
             }
             
+            // QUIT BUTTON
             
         }
         

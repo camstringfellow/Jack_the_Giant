@@ -9,6 +9,8 @@
 import SpriteKit
 
 class CloudsController {
+    
+    let collectableController = CollectablesController()
 
     var lastCloudPositionY = CGFloat()
     
@@ -36,11 +38,11 @@ class CloudsController {
     
     
     func createClouds() -> [SKSpriteNode] {
-        
+        print("Create clouds called")
         var clouds = [SKSpriteNode]()
         
         //for i = 0; i < 2; i++
-        for i in 0..<2 {
+        for _ in 0..<2 {
             
             
             
@@ -137,6 +139,22 @@ class CloudsController {
             //set cloud position
             clouds[i].position = CGPoint(x: randomX, y: positionY)
             clouds[i].zPosition = 3
+            
+            if !initialClouds {
+                
+                if Int(randomBetweenNumbers(firstNum: 0, secondNum: 7)) >= 3 {
+                    
+                    if clouds[i].name != "Dark Cloud" {
+                        let collectable = collectableController.getCollectable()
+                        collectable.position = CGPoint(x: clouds[i].position.x, y: clouds[i].position.y + 60)
+                        
+                        scene.addChild(collectable)
+                    }
+                    
+                }
+                
+            }
+            
             
             //add clouds to scene
             scene.addChild(clouds[i])
