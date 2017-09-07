@@ -12,7 +12,7 @@ import SpriteKit
 class MainMenuScene: SKScene {
     
     override func didMove(to view: SKView) {
-       
+       GameManager.instance.initalizeGameData()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

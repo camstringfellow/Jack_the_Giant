@@ -18,7 +18,7 @@ class GameManager {
     var gameStartedFromMainMenu = false
     var gameRestartedPlayerDied = false
     
-    func initalizeData() {
+    func initalizeGameData() {
         
         if !FileManager.default.fileExists(atPath: getFilePath()) {
             //set up game with inital values
