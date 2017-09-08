@@ -27,6 +27,10 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
     
     var center: CGFloat?
     
+    private var acceleration = CGFloat()
+    private var cameraSpeed = CGFloat()
+    private var maxSpeed = CGFloat()
+    
     private let minPlayerX = CGFloat(-214)
     private let maxPlayerX = CGFloat(214)
     
@@ -51,7 +55,8 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         managePlayer()
         manageBackgrounds()
         createNewClouds()
-        player?.setScore() 
+        player?.setScore()
+        
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
@@ -173,6 +178,8 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         
         cameraDistanceBeforeCreatingNewClouds = (mainCamera?.position.y)! - 400
         
+        setCameraSpeed()
+        
     }
     
     //continuous background
@@ -218,10 +225,16 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
     
     // move camera downwards
     func moveCamera() {
-        self.mainCamera?.position.y -= 3
+        
+        cameraSpeed += acceleration
+        if cameraSpeed > maxSpeed {
+            cameraSpeed = maxSpeed
+        }
+        
+        self.mainCamera?.position.y -= cameraSpeed
     }
     
-    
+ 
     //continuous background
     func manageBackgrounds() {
         bg1?.moveBG(camera: mainCamera!)
@@ -300,6 +313,21 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         self.mainCamera?.addChild(pausePanel)
     }
     
+    private func setCameraSpeed() {
+        if GameManager.instance.getEasyDifficulty() {
+            acceleration = 0.001
+            cameraSpeed = 1.5
+            maxSpeed = 4
+        } else if GameManager.instance.getMediumDifficulty() {
+            acceleration = 0.002
+            cameraSpeed = 2.0
+            maxSpeed = 6
+        } else if GameManager.instance.getHardDifficulty() {
+            acceleration = 0.003
+            cameraSpeed = 2.5
+            maxSpeed = 8
+        }
+    }
     
 }
 

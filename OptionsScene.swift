@@ -43,25 +43,27 @@ class OptionsScene: SKScene {
     }
     
     private func setDifficulty(difficulty: String) {
-        switch(difficulty) {
+        switch difficulty {
         case "easy":
             GameManager.instance.setEasyDifficulty(easyDifficulty: true)
             GameManager.instance.setMediumDifficulty(mediumDifficulty: false)
             GameManager.instance.setHardDifficulty(hardDifficulty: false)
-            break
+            
+            //break
         case "medium":
             GameManager.instance.setEasyDifficulty(easyDifficulty: false)
             GameManager.instance.setMediumDifficulty(mediumDifficulty: true)
             GameManager.instance.setHardDifficulty(hardDifficulty: false)
-            break
+           // break
         case "hard":
             GameManager.instance.setEasyDifficulty(easyDifficulty: false)
             GameManager.instance.setMediumDifficulty(mediumDifficulty: false)
             GameManager.instance.setHardDifficulty(hardDifficulty: true)
-            break
+         //   break
         default:
             break
         }
+        GameManager.instance.saveData()
     }
     
     
