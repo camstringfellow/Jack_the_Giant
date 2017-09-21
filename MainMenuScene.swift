@@ -11,8 +11,16 @@ import SpriteKit
 
 class MainMenuScene: SKScene {
     
+    private var musicBtn: SKSpriteNode?
+    private let musicOn = SKTexture(imageNamed: "Music On Button")
+    private let musicOff = SKTexture(imageNamed: "Music Off Button")
+    
+    
     override func didMove(to view: SKView) {
-       GameManager.instance.initalizeGameData()
+        musicBtn = self.childNode(withName: "Music") as? SKSpriteNode
+        GameManager.instance.initalizeGameData()
+        //AudioManager.instance.playBGMusic()
+        setMusic()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -53,11 +61,40 @@ class MainMenuScene: SKScene {
                 
             }
             
-            // QUIT BUTTON
+            //if user clicks music button
+            if atPoint(location) == musicBtn {
+                handleMusicButton()
+            }
             
         }
         
     }
+    
+    private func setMusic() {
+        if GameManager.instance.getIsMusicOn() {
+            AudioManager.instance.playBGMusic()
+            
+            musicBtn?.texture = musicOff
+        }
+    }
+    
+    private func handleMusicButton() {
+        if GameManager.instance.getIsMusicOn() {
+            //the music is playing, turn it off
+            AudioManager.instance.stopBGMusic()
+            GameManager.instance.setIsMusicOn(isMusicOn: false)
+            musicBtn?.texture = musicOn
+        } else {
+            //the music is not playing, turn it on
+            AudioManager.instance.playBGMusic()
+            GameManager.instance.setIsMusicOn(isMusicOn: true)
+            musicBtn?.texture = musicOff
+        }
+        
+        GameManager.instance.saveData()
+        
+    }
+
     
 }
 

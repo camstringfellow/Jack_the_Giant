@@ -17,6 +17,7 @@
 		D8236C731F462D6E0097D4DC /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8236C721F462D6E0097D4DC /* GameManager.swift */; };
 		D8236C751F4635410097D4DC /* CollectablesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8236C741F4635410097D4DC /* CollectablesController.swift */; };
 		D82485F41F4380D800771693 /* CloudsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82485F31F4380D800771693 /* CloudsController.swift */; };
+		D849C5FB1F72EF4D00007EF3 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D849C5FA1F72EF4D00007EF3 /* AudioManager.swift */; };
 		D84C90671F4238A800C14479 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84C90661F4238A800C14479 /* AppDelegate.swift */; };
 		D84C90691F4238A800C14479 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D84C90681F4238A800C14479 /* GameScene.sks */; };
 		D84C906B1F4238A800C14479 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = D84C906A1F4238A800C14479 /* Actions.sks */; };
@@ -104,6 +105,7 @@
 		D8236C721F462D6E0097D4DC /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		D8236C741F4635410097D4DC /* CollectablesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectablesController.swift; sourceTree = "<group>"; };
 		D82485F31F4380D800771693 /* CloudsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudsController.swift; sourceTree = "<group>"; };
+		D849C5FA1F72EF4D00007EF3 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		D84C90631F4238A800C14479 /* Jack the Giant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jack the Giant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84C90661F4238A800C14479 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D84C90681F4238A800C14479 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -210,6 +212,14 @@
 				D8236C741F4635410097D4DC /* CollectablesController.swift */,
 			);
 			name = "Cloud and Collectable Controllers";
+			sourceTree = "<group>";
+		};
+		D849C5F91F72EEF300007EF3 /* Audio Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D849C5FA1F72EF4D00007EF3 /* AudioManager.swift */,
+			);
+			name = "Audio Manager";
 			sourceTree = "<group>";
 		};
 		D84C905A1F4238A800C14479 = {
@@ -405,6 +415,7 @@
 		D84C90EA1F42395200C14479 /* Game Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D849C5F91F72EEF300007EF3 /* Audio Manager */,
 				D85A75201F5A0BF1001E82C1 /* Game Data Class */,
 				D8236C6F1F45F27C0097D4DC /* Game Controllers And Managers */,
 				D82485F21F4380C200771693 /* Cloud and Collectable Controllers */,
@@ -653,6 +664,7 @@
 				D8236C751F4635410097D4DC /* CollectablesController.swift in Sources */,
 				D84C91061F42A9BC00C14479 /* BGClass.swift in Sources */,
 				D8236C731F462D6E0097D4DC /* GameManager.swift in Sources */,
+				D849C5FB1F72EF4D00007EF3 /* AudioManager.swift in Sources */,
 				D82485F41F4380D800771693 /* CloudsController.swift in Sources */,
 				D84C90ED1F42397300C14479 /* GameplayScene.swift in Sources */,
 				D81144B61F44BBB7001FEC04 /* OptionsScene.swift in Sources */,

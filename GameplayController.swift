@@ -18,9 +18,9 @@ class GameplayController {
     var coinText: SKLabelNode?
     var lifeText: SKLabelNode?
     
-    var score: Int?
-    var coin: Int?
-    var life: Int?
+    var score: Int32?
+    var coin: Int32?
+    var life: Int32?
     
     // Initilize the variables
     func initilizeVariables() {
@@ -31,7 +31,7 @@ class GameplayController {
             
             score = 0
             coin = 0
-            life = 1
+            life = 0
             
             scoreText?.text = "\(score!)"
             coinText?.text = "x\(coin!)"
