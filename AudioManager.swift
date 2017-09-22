@@ -42,10 +42,12 @@ class AudioManager {
     func stopBGMusic() {
         
         if (audioPlayer?.isPlaying)! {
-
             audioPlayer?.stop()
-
         }
+    }
+    
+    func isAudioPlayerInitialized() -> Bool {
+        return audioPlayer == nil
     }
     
 }

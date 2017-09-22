@@ -100,7 +100,7 @@ class CloudsController {
     }
     
     
-    func arrageCloudsInScene(scene: SKScene, distanceBetweenClouds: CGFloat, center: CGFloat, minX: CGFloat, maxX: CGFloat, initialClouds: Bool) {
+    func arrageCloudsInScene(scene: SKScene, distanceBetweenClouds: CGFloat, center: CGFloat, minX: CGFloat, maxX: CGFloat, player: Player, initialClouds: Bool) {
         
         var clouds = createClouds()
         var positionY = CGFloat()
@@ -161,6 +161,12 @@ class CloudsController {
             //create new cloud location
             positionY -= distanceBetweenClouds
             lastCloudPositionY = positionY
+            
+            if initialClouds {
+                
+                player.position = CGPoint(x: clouds[0].position.x, y: clouds[0].position.y + 70)
+                
+            }
         }
      }
      

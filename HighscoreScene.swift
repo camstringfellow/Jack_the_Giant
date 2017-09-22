@@ -50,6 +50,8 @@ class HighscoreScene: SKScene {
                 
                 let scene = MainMenuScene(fileNamed: "MainMenu")
                 
+                self.run(SKAction.playSoundFileNamed("Click Sound.wav", waitForCompletion: false))
+                
                 scene?.scaleMode = .aspectFill
                 
                 self.view?.presentScene(scene!, transition: SKTransition.push(with: SKTransitionDirection.right, duration: 1))

@@ -19,7 +19,6 @@ class MainMenuScene: SKScene {
     override func didMove(to view: SKView) {
         musicBtn = self.childNode(withName: "Music") as? SKSpriteNode
         GameManager.instance.initalizeGameData()
-        //AudioManager.instance.playBGMusic()
         setMusic()
     }
     
@@ -33,6 +32,8 @@ class MainMenuScene: SKScene {
                 
                 GameManager.instance.gameStartedFromMainMenu = true
                 
+                self.run(SKAction.playSoundFileNamed("Click Sound.wav", waitForCompletion: false))
+                
                 let scene = GameplayScene(fileNamed: "GameplayScene")
                 
                 scene?.scaleMode = .aspectFill
@@ -45,6 +46,8 @@ class MainMenuScene: SKScene {
                 
                 let scene = HighscoreScene(fileNamed: "HighscoreScene")
                 
+                self.run(SKAction.playSoundFileNamed("Click Sound.wav", waitForCompletion: false))
+                
                 scene?.scaleMode = .aspectFill
                 
                 self.view?.presentScene(scene!, transition: SKTransition.push(with: SKTransitionDirection.left, duration: 1))
@@ -54,6 +57,8 @@ class MainMenuScene: SKScene {
             if atPoint(location).name ==  "Options" {
                 
                 let scene = OptionsScene(fileNamed: "OptionsScene")
+                
+                self.run(SKAction.playSoundFileNamed("Click Sound.wav", waitForCompletion: false))
                 
                 scene?.scaleMode = .aspectFill
                 
@@ -72,9 +77,13 @@ class MainMenuScene: SKScene {
     
     private func setMusic() {
         if GameManager.instance.getIsMusicOn() {
-            AudioManager.instance.playBGMusic()
             
+            if AudioManager.instance.isAudioPlayerInitialized() {
+            
+            AudioManager.instance.playBGMusic()
             musicBtn?.texture = musicOff
+            
+            }
         }
     }
     

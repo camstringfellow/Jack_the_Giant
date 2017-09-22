@@ -94,6 +94,9 @@ class OptionsScene: SKScene {
             //back button
             if atPoint(location).name ==  "Back" {
                 let scene = MainMenuScene(fileNamed: "MainMenu")
+                
+                self.run(SKAction.playSoundFileNamed("Click Sound.wav", waitForCompletion: false))
+                
                 scene?.scaleMode = .aspectFill
                 
                 self.view?.presentScene(scene!, transition: SKTransition.push(with: SKTransitionDirection.left, duration: 1))

@@ -81,6 +81,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         
         if firstBody.node?.name == "Player" && secondBody.node?.name == "Life" {
             //Play the life sound
+            self.run(SKAction.playSoundFileNamed("Life Sound.wav", waitForCompletion: false))
             //increment the life score
             GameplayController.instance.incrementLife()
             //remove life from game
@@ -88,7 +89,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             
         } else if firstBody.node?.name == "Player" && secondBody.node?.name == "Coin" {
             //Play the coin sound
-            
+            self.run(SKAction.playSoundFileNamed("Coin Sound.wav", waitForCompletion: false))
             //increment the coin score
             GameplayController.instance.incrementCoin()
             //remove coin from game
@@ -127,13 +128,16 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             
             // --- PLAYER ACTION --- //
             
-            if self.scene?.isPaused == false {
-                if location.x > center! {
-                    moveLeft = false
-                    player?.animatePlayer(moveLeft: moveLeft)
-                } else {
-                    moveLeft = true
-                    player?.animatePlayer(moveLeft: moveLeft)
+            if atPoint(location).name != "Pause" && atPoint(location).name != "Resume" && atPoint(location).name != "Quit" {
+                
+                if self.scene?.isPaused == false {
+                    if location.x > center! {
+                        moveLeft = false
+                        player?.animatePlayer(moveLeft: moveLeft)
+                    } else {
+                        moveLeft = true
+                        player?.animatePlayer(moveLeft: moveLeft)
+                    }
                 }
             }
             
@@ -141,6 +145,9 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             
             if atPoint(location).name == "Pause" {
                 self.scene?.isPaused = true
+                
+                self.run(SKAction.playSoundFileNamed("Click Sound.wav", waitForCompletion: false))
+                
                 createPausePanel()
             }
             
@@ -148,13 +155,14 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             
             if atPoint(location).name == "Resume" {
                 pausePanel.removeFromParent()
+                self.run(SKAction.playSoundFileNamed("Click Sound.wav", waitForCompletion: false))
                 self.scene?.isPaused = false
             }
             
             if atPoint(location).name == "Quit" {
                 let scene = MainMenuScene(fileNamed: "MainMenu")
+                self.run(SKAction.playSoundFileNamed("Click Sound.wav", waitForCompletion: false))
                 scene?.scaleMode = .aspectFill
-                
                 self.view?.presentScene(scene!, transition: SKTransition.doorsCloseHorizontal(withDuration: 1))
             }
         }
@@ -191,7 +199,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
         //initilize coin, score, and life values
         GameplayController.instance.initilizeVariables()
         
-        cloudsController.arrageCloudsInScene(scene: self.scene!, distanceBetweenClouds: distanceBetweenClouds, center: center!, minX: minX, maxX: maxX, initialClouds: true)
+        cloudsController.arrageCloudsInScene(scene: self.scene!, distanceBetweenClouds: distanceBetweenClouds, center: center!, minX: minX, maxX: maxX, player: player!, initialClouds: true)
         
         cameraDistanceBeforeCreatingNewClouds = (mainCamera?.position.y)! - 400
         
@@ -290,7 +298,7 @@ class GameplayScene: SKScene, SKPhysicsContactDelegate {
             
             cameraDistanceBeforeCreatingNewClouds = (mainCamera?.position.y)! - 400
             
-            cloudsController.arrageCloudsInScene(scene: self.scene!, distanceBetweenClouds: distanceBetweenClouds, center: center!, minX: minX, maxX: maxX, initialClouds: false)
+            cloudsController.arrageCloudsInScene(scene: self.scene!, distanceBetweenClouds: distanceBetweenClouds, center: center!, minX: minX, maxX: maxX, player: player!, initialClouds: false)
             
             checkForChildsOutOfScreen()
         }

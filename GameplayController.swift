@@ -29,9 +29,9 @@ class GameplayController {
             
             GameManager.instance.gameStartedFromMainMenu = false
             
-            score = 0
+            score = -1
             coin = 0
-            life = 0
+            life = 2
             
             scoreText?.text = "\(score!)"
             coinText?.text = "x\(coin!)"
